@@ -83,7 +83,7 @@ function App() {
           <GameOverBody onClick={handleNewGame} score={scoreTotal || 0} />
         )}
       </Card>
-      <Card className="w-full">
+      <Card className="w-full max-w-xl">
         <CardHeader className="pb-0">
           <div className="flex items-center justify-between">
             <CardTitle>Yahtzee Score Card</CardTitle>
