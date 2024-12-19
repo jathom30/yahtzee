@@ -1,5 +1,12 @@
+import { CircleCheckBig, CircleOff } from "lucide-react";
 import { TScoreKey } from "../utils";
 import { Button } from "./ui/button";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "./ui/tooltip";
 
 export const Section = ({
   item,
@@ -25,7 +32,7 @@ export const Section = ({
     typeof score[item.id] !== "number" && scoreProposals?.[item.id],
   );
   return (
-    <div>
+    <div className="space-y-1">
       <div className="flex gap-2 items-end">
         <h6 className="text-lg min-w-max font-bold">{item.label}</h6>
         <div className="border-b border-dotted w-full" />
@@ -48,14 +55,38 @@ export const Section = ({
         {typeof score[item.id] === "number" ? null : scoreProposals?.[
             item.id
           ] ? (
-          <Button onClick={() => onAcceptScore(item.id)}>Accept Score</Button>
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button size="icon" onClick={() => onAcceptScore(item.id)}>
+                  <CircleCheckBig />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>Accept</p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
         ) : isLastRoll &&
           !["upper_bonus", "bonus_yahtzee_1", "bonus_yahtzee_2"].includes(
             item.id,
           ) ? (
-          <Button variant="outline" onClick={() => onScratch(item.id)}>
-            Scratch
-          </Button>
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button
+                  size="icon"
+                  variant="outline"
+                  onClick={() => onScratch(item.id)}
+                >
+                  <CircleOff />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>Scratch</p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
         ) : null}
       </div>
     </div>

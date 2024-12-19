@@ -18,6 +18,7 @@ import {
 import { Section } from "./components/section";
 import { Die } from "./components/die";
 import { useDice } from "./use-dice";
+import { GameOverBody } from "./components/game-over-body";
 
 function App() {
   const {
@@ -77,10 +78,7 @@ function App() {
             ) : null}
           </>
         ) : (
-          <div className="space-y-2 text-center">
-            <p className="text-2xl">Game Over!</p>
-            <Button onClick={handleNewGame}>Play again?</Button>
-          </div>
+          <GameOverBody onClick={handleNewGame} score={scoreTotal || 0} />
         )}
       </Card>
       <Card className="w-full">

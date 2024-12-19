@@ -168,9 +168,8 @@ const getTotalOfSide = (dice: TDie[], side: number) => {
   );
 };
 
-const getTotalOfDice = (dice: TDie[]) => {
-  return dice.reduce((total, die) => total + die.side, 0);
-};
+const getTotalOfDice = (dice: TDie[]) =>
+  dice.reduce((total, die) => total + die.side, 0);
 
 const getSideCounts = (dice: TDie[]) => {
   const sideCounts = dice.reduce((acc, die) => {
