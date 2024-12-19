@@ -50,25 +50,27 @@ function App() {
       <Card className="sticky top-4 p-2 bg-card space-y-2">
         {!isGameOver ? (
           <>
-            <div className="flex flex-wrap justify-center gap-1">
-              {dice.map((die) => (
-                <button
-                  key={die.id}
-                  onClick={() => handleLock(die.id)}
-                  className={`bg-card p-0 relative ${
-                    die.locked ? "opacity-65" : ""
-                  }`}
-                  disabled={!rollCount}
-                >
-                  {rollCount > 0 ? (
-                    <div className="absolute bg-card p-1 rounded-full border -top-1 -left-1">
-                      {die.locked ? <Lock size={10} /> : <Unlock size={10} />}
-                    </div>
-                  ) : null}
-                  <Die side={die.side} />
-                </button>
-              ))}
-            </div>
+            {rollCount > 0 ? (
+              <div className="flex flex-wrap justify-center gap-1">
+                {dice.map((die) => (
+                  <button
+                    key={die.id}
+                    onClick={() => handleLock(die.id)}
+                    className={`bg-card p-0 relative ${
+                      die.locked ? "opacity-65" : ""
+                    }`}
+                    disabled={!rollCount}
+                  >
+                    {rollCount > 0 ? (
+                      <div className="absolute bg-card p-1 rounded-full border -top-1 -left-1">
+                        {die.locked ? <Lock size={10} /> : <Unlock size={10} />}
+                      </div>
+                    ) : null}
+                    <Die side={die.side} />
+                  </button>
+                ))}
+              </div>
+            ) : null}
             {!endOfTurn ? (
               <CardFooter className="p-0">
                 <Button size="lg" onClick={handleRoll}>
