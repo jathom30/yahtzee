@@ -82,26 +82,16 @@ export const useDice = () => {
   };
 
   useEffect(() => {
-    const handleKeyPress = (dieId: string) => {
+    const handleLockOnKeyPress = (dieId: string) => {
       const dice = ["1", "2", "3", "4", "5"];
       if (!dice.includes(dieId)) return;
-      setDice((prev) => {
-        return prev.map((die) => {
-          if (die.id === dieId) {
-            return {
-              ...die,
-              locked: !die.locked,
-            };
-          }
-          return die;
-        });
-      });
+      handleLock(dieId);
     };
     document.addEventListener("keyup", (e) => {
-      handleKeyPress(e.key);
+      handleLockOnKeyPress(e.key);
     });
     return () => {
-      document.removeEventListener("keyup", (e) => handleKeyPress(e.key));
+      document.removeEventListener("keyup", (e) => handleLockOnKeyPress(e.key));
     };
   }, []);
 
