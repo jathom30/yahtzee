@@ -61,11 +61,12 @@ function App() {
                     }`}
                     disabled={!rollCount}
                   >
-                    {rollCount > 0 ? (
-                      <div className="absolute bg-card p-1 rounded-full border -top-1 -left-1">
-                        {die.locked ? <Lock size={10} /> : <Unlock size={10} />}
-                      </div>
-                    ) : null}
+                    <div className="absolute bg-card p-1 rounded-full border -top-1 -left-1">
+                      {die.locked ? <Lock size={10} /> : <Unlock size={10} />}
+                    </div>
+                    <div className="absolute text-xs  bg-card px-1 rounded-full border -bottom-1 -right-1">
+                      {die.id}
+                    </div>
                     <Die side={die.side} />
                   </button>
                 ))}

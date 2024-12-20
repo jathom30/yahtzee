@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   createProposals,
   defaultDice,
@@ -80,6 +80,30 @@ export const useDice = () => {
     setScore(defaultScore);
     onReset();
   };
+
+  useEffect(() => {
+    const handleKeyPress = (dieId: string) => {
+      const dice = ["1", "2", "3", "4", "5"];
+      if (!dice.includes(dieId)) return;
+      setDice((prev) => {
+        return prev.map((die) => {
+          if (die.id === dieId) {
+            return {
+              ...die,
+              locked: !die.locked,
+            };
+          }
+          return die;
+        });
+      });
+    };
+    document.addEventListener("keyup", (e) => {
+      handleKeyPress(e.key);
+    });
+    return () => {
+      document.removeEventListener("keyup", (e) => handleKeyPress(e.key));
+    };
+  }, []);
 
   return {
     score,
