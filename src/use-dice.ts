@@ -14,6 +14,8 @@ export const useDice = () => {
   const [score, setScore] = useState(defaultScore);
   const [propsals, setProposals] =
     useState<Partial<Record<TScoreKey, number>>>();
+  const highScoreLocalStorage = localStorage.getItem("high-score");
+  const highScore = highScoreLocalStorage ? Number(highScoreLocalStorage) : 0;
 
   const endOfTurn = rollCount > 2;
   const handleLock = (dieId: string) => {
@@ -76,7 +78,12 @@ export const useDice = () => {
     onReset();
   };
 
+  const scoreTotal = Object.values(score).reduce(
+    (total, val) => (total || 0) + (val || 0),
+    0,
+  );
   const handleNewGame = () => {
+    localStorage.setItem("high-score", String(scoreTotal || 0));
     setScore(defaultScore);
     onReset();
   };
@@ -96,6 +103,7 @@ export const useDice = () => {
   }, []);
 
   return {
+    highScore,
     score,
     dice,
     propsals,
